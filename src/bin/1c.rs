@@ -1,9 +1,10 @@
-// Reverse Complement Problem
-//
-// Find the reverse complement of a DNA string.
-//
-// Given: A DNA string Pattern.
-// Return: Pattern, the reverse complement of Pattern.
+//! ### Reverse Complement Problem
+//!
+//! Find the reverse complement of a DNA string.
+//!
+//! **Given:** A DNA string Pattern.
+//!
+//! **Return:** Pattern, the reverse complement of Pattern.
 
 use std::fs::File;
 use std::io::prelude::*;

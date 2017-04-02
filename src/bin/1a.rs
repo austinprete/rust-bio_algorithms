@@ -1,24 +1,21 @@
-// A k-mer is a string of length k. We define Count(Text, Pattern) as the number of times that a k-mer Pattern appears as a 
-// substring of Text. For example,
-// 
-// Count(ACAACTATGCATACTATCGGGAACTATCCT,ACTAT)=3Count(ACAACTATGCATACTATCGGGAACTATCCT,ACTAT)=3.
-// We note that Count(CGATATATCCATAGCGATATATCCATAG, ATAATA) is equal to 3 (not 2) since we should account for overlapping 
-// occurrences of Pattern in Text.
-// 
-// To compute Count(Text, Pattern), our plan is to “slide a window” down Text, checking whether each k-mer substring of 
-// Text matches Pattern. 
-// 
-//     PatternCount(Text, Pattern)
-//         count ← 0
-//         for i ← 0 to |Text| − |Pattern|
-//             if Text(i, |Pattern|) = Pattern
-//                 count ← count + 1
-//         return count
-// 
-// Implement PatternCount
-// 
-// Given: {DNA strings}} Text and Pattern.
-// Return: Count(Text, Pattern).
+//! A k-mer is a string of length k. We define Count(Text, Pattern) as the number of times that a k-mer Pattern appears as a 
+//! substring of Text.
+//!
+//! To compute Count(Text, Pattern), our plan is to “slide a window” down Text, checking whether each k-mer substring of 
+//! Text matches Pattern. 
+//! 
+//!     PatternCount(Text, Pattern)
+//!         count ← 0
+//!         for i ← 0 to |Text| − |Pattern|
+//!             if Text(i, |Pattern|) = Pattern
+//!                 count ← count + 1
+//!         return count
+//! 
+//! ### Implement PatternCount
+//! 
+//! **Given:** {DNA strings} Text and Pattern.
+//!
+//! **Return:** Count(Text, Pattern)
 
 use std::io::prelude::*;
 use std::fs::File;
