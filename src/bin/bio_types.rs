@@ -51,6 +51,7 @@ impl fmt::Display for Nucleotide {
     }
 }
 
+/// This type represents a DNA sequence as a vector of nucleotides
 #[allow(non_camel_case_types)]
 #[derive(Clone, Debug, Eq, PartialEq, Hash)]
 pub struct DNA_Sequence(pub Vec<Nucleotide>);
