@@ -24,4 +24,3 @@ fn main() {
 
     println!("{}", dna_pattern.reverse_complement())
 }
-
