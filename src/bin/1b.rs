@@ -15,7 +15,7 @@ use std::fs::File;
 use std::collections::HashMap;
 
 mod bio_types;
-use bio_types::DNA_Pattern;
+use bio_types::DNA_Sequence;
 
 fn main() {
     let mut f = File::open("test_files/1b.txt").expect("Coudln't open file");
@@ -24,7 +24,7 @@ fn main() {
 
     let lines: Vec<&str> = file_text.split('\n').collect();
 
-    let pattern = DNA_Pattern::from_string(lines[0]);
+    let pattern = DNA_Sequence::from_string(lines[0]);
     let k = lines[1].parse::<usize>().unwrap();
 
     let result = find_frequent_words(pattern, k);
@@ -35,13 +35,13 @@ fn main() {
     println!("");
 }
 
-fn find_frequent_words(pattern: DNA_Pattern, k: usize) -> Vec<DNA_Pattern> {
+fn find_frequent_words(pattern: DNA_Sequence, k: usize) -> Vec<DNA_Sequence> {
 
     let mut map = HashMap::new();
     let mut highest_count = 0;
 
     for index in 0..(pattern.len() - k + 1) {
-        let sub_pattern = DNA_Pattern((&pattern[index..index + k]).to_vec());
+        let sub_pattern = DNA_Sequence((&pattern[index..index + k]).to_vec());
         let count = map.entry(sub_pattern).or_insert(0);
         *count += 1;
         if *count > highest_count {

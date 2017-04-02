@@ -53,11 +53,11 @@ impl fmt::Display for Nucleotide {
 
 #[allow(non_camel_case_types)]
 #[derive(Clone, Debug, Eq, PartialEq, Hash)]
-pub struct DNA_Pattern(pub Vec<Nucleotide>);
+pub struct DNA_Sequence(pub Vec<Nucleotide>);
 
-impl DNA_Pattern {
+impl DNA_Sequence {
     #[allow(dead_code)]
-    pub fn reverse_complement(&mut self) -> DNA_Pattern {
+    pub fn reverse_complement(&mut self) -> DNA_Sequence {
 
         let reverse_complement_vec = self.0
             .iter()
@@ -65,16 +65,16 @@ impl DNA_Pattern {
             .map(|x| x.complement())
             .collect::<Vec<Nucleotide>>();
 
-        DNA_Pattern(reverse_complement_vec)
+        DNA_Sequence(reverse_complement_vec)
     }
 
     #[allow(dead_code)]
-    pub fn from_string(dna_string: &str) -> DNA_Pattern {
+    pub fn from_string(dna_string: &str) -> DNA_Sequence {
         let pattern_vec = dna_string.chars()
             .map(|letter| Nucleotide::from_char(letter))
             .collect();
 
-        DNA_Pattern(pattern_vec)
+        DNA_Sequence(pattern_vec)
     }
 
     #[allow(dead_code)]
@@ -83,11 +83,11 @@ impl DNA_Pattern {
     }
 
     #[allow(dead_code)]
-    pub fn pattern_match_count(&self, other_pattern: DNA_Pattern) -> usize {
+    pub fn pattern_match_count(&self, other_pattern: DNA_Sequence) -> usize {
         let mut count = 0;
 
         for index in 0..(self.len() - other_pattern.len() + 1) {
-            if other_pattern == DNA_Pattern(self[index..index + other_pattern.len()].to_vec()) {
+            if other_pattern == DNA_Sequence(self[index..index + other_pattern.len()].to_vec()) {
                 count += 1;
             }
         }
@@ -96,7 +96,7 @@ impl DNA_Pattern {
     }
 }
 
-impl Index<usize> for DNA_Pattern {
+impl Index<usize> for DNA_Sequence {
     type Output = Nucleotide;
 
     fn index(&self, index: usize) -> &Nucleotide {
@@ -104,7 +104,7 @@ impl Index<usize> for DNA_Pattern {
     }
 }
 
-impl Index<Range<usize>> for DNA_Pattern {
+impl Index<Range<usize>> for DNA_Sequence {
     type Output = [Nucleotide];
 
     fn index(&self, range: Range<usize>) -> &[Nucleotide] {
@@ -112,7 +112,7 @@ impl Index<Range<usize>> for DNA_Pattern {
     }
 }
 
-impl fmt::Display for DNA_Pattern {
+impl fmt::Display for DNA_Sequence {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let pattern_string = self.0
             .iter()

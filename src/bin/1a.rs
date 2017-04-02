@@ -21,7 +21,7 @@ use std::io::prelude::*;
 use std::fs::File;
 
 mod bio_types;
-use bio_types::DNA_Pattern;
+use bio_types::DNA_Sequence;
 
 fn main() {
     let mut f = File::open("test_files/1a.txt").expect("Coudln't open file");
@@ -30,8 +30,8 @@ fn main() {
 
     let lines: Vec<&str> = file_text.split('\n').collect();
 
-    let dna_pattern = DNA_Pattern::from_string(lines[0]);
-    let sub_pattern = DNA_Pattern::from_string(lines[1]);
+    let dna_pattern = DNA_Sequence::from_string(lines[0]);
+    let sub_pattern = DNA_Sequence::from_string(lines[1]);
 
     let result = dna_pattern.pattern_match_count(sub_pattern);
 

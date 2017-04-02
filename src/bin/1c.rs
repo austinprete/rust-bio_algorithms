@@ -10,7 +10,7 @@ use std::fs::File;
 use std::io::prelude::*;
 
 mod bio_types;
-use bio_types::DNA_Pattern;
+use bio_types::DNA_Sequence;
 
 fn main() {
     let mut f = File::open("test_files/1c.txt").expect("Coudln't open file");
@@ -20,7 +20,7 @@ fn main() {
     let lines: Vec<&str> = file_text.split('\n').collect();
 
     let pattern_string = lines[0];
-    let mut dna_pattern = DNA_Pattern::from_string(pattern_string);
+    let mut dna_pattern = DNA_Sequence::from_string(pattern_string);
 
     println!("{}", dna_pattern.reverse_complement())
 }
