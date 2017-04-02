@@ -35,29 +35,6 @@ fn main() {
     println!("");
 }
 
-// fn find_frequent_words(text: &str, k: usize) -> Vec<&str> {
-//     let mut map = HashMap::new();
-//     let mut highest_count = 0;
-//     let mut frequent_words = Vec::new();
-
-//     for index in 0..(text.len()-k+1) {
-//         let substring = &text[index..index+k];
-//         let count = map.entry(substring).or_insert(0);
-//         *count += 1;
-//         if *count > highest_count {
-//             highest_count = *count;
-//         }
-//     }
-
-//     for (key, value) in &map {
-//         if *value == highest_count {
-//             frequent_words.push(*key);
-//         }
-//     }
-
-//     frequent_words
-// }
-
 fn find_frequent_words(pattern: DNA_Pattern, k: usize) -> Vec<DNA_Pattern> {
 
     let mut map = HashMap::new();

@@ -1,3 +1,4 @@
+use std::ascii::AsciiExt;
 use std::fmt;
 use std::ops::{Index, Range};
 
@@ -25,7 +26,7 @@ impl Nucleotide {
     fn from_char(letter: char) -> Nucleotide {
         use self::Nucleotide::*;
 
-        match letter {
+        match letter.to_ascii_uppercase() {
             'A' => A,
             'C' => C,
             'G' => G,
@@ -79,6 +80,19 @@ impl DNA_Pattern {
     #[allow(dead_code)]
     pub fn len(&self) -> usize {
         self.0.len()
+    }
+
+    #[allow(dead_code)]
+    pub fn pattern_match_count(&self, other_pattern: DNA_Pattern) -> usize {
+        let mut count = 0;
+
+        for index in 0..(self.len() - other_pattern.len() + 1) {
+            if other_pattern == DNA_Pattern(self[index..index + other_pattern.len()].to_vec()) {
+                count += 1;
+            }
+        }
+
+        count
     }
 }
 
