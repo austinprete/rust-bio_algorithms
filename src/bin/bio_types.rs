@@ -57,6 +57,9 @@ impl fmt::Display for Nucleotide {
 pub struct DNA_Sequence(pub Vec<Nucleotide>);
 
 impl DNA_Sequence {
+
+    /// Creates and returns a new DNA sequence representing the reverse
+    /// complement of the current sequence.
     #[allow(dead_code)]
     pub fn reverse_complement(&mut self) -> DNA_Sequence {
 
@@ -69,6 +72,8 @@ impl DNA_Sequence {
         DNA_Sequence(reverse_complement_vec)
     }
 
+    /// Provided a string representation of a DNA sequence (such as "AACGTACA"),
+    /// returns a corresponding DNA_Sequence instance.
     #[allow(dead_code)]
     pub fn from_string(dna_string: &str) -> DNA_Sequence {
         let pattern_vec = dna_string.chars()
@@ -78,17 +83,19 @@ impl DNA_Sequence {
         DNA_Sequence(pattern_vec)
     }
 
+    /// Returns the length of the sequence (the number of nucleotides it contains).
     #[allow(dead_code)]
     pub fn len(&self) -> usize {
         self.0.len()
     }
 
+    /// Provided a DNA pattern, returns the number of matches found in this sequence.
     #[allow(dead_code)]
-    pub fn pattern_match_count(&self, other_pattern: DNA_Sequence) -> usize {
+    pub fn pattern_match_count(&self, pattern: DNA_Sequence) -> usize {
         let mut count = 0;
 
-        for index in 0..(self.len() - other_pattern.len() + 1) {
-            if other_pattern == DNA_Sequence(self[index..index + other_pattern.len()].to_vec()) {
+        for index in 0..(self.len() - pattern.len() + 1) {
+            if pattern == DNA_Sequence(self[index..index + pattern.len()].to_vec()) {
                 count += 1;
             }
         }
