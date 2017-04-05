@@ -19,16 +19,18 @@
 //!
 //! **Return:** Count(Text, Pattern)
 
+extern crate bio_algorithms as bio;
+
 use std::io::prelude::*;
 use std::fs::File;
 
-mod bio_types;
-use bio_types::DNA_Sequence;
+use bio::bio_types::DNA_Sequence;
 
 fn main() {
     let mut f = File::open("test_files/1a.txt").expect("Coudln't open file");
     let mut file_text = String::new();
-    f.read_to_string(&mut file_text).expect("Couldn't read file");
+    f.read_to_string(&mut file_text)
+        .expect("Couldn't read file");
 
     let lines: Vec<&str> = file_text.split('\n').collect();
 

@@ -2,6 +2,8 @@ use std::ascii::AsciiExt;
 use std::fmt;
 use std::ops::{Index, Range};
 
+/// Represents a single nucleotide and acts as a building block
+/// for the DNA_Sequence type.
 #[allow(non_camel_case_types)]
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
 pub enum Nucleotide {
@@ -12,7 +14,8 @@ pub enum Nucleotide {
 }
 
 impl Nucleotide {
-    fn complement(&self) -> Nucleotide {
+    /// Returns the complement of the current nucleotide.
+    pub fn complement(&self) -> Nucleotide {
         use self::Nucleotide::*;
 
         match *self {
@@ -51,13 +54,12 @@ impl fmt::Display for Nucleotide {
     }
 }
 
-/// This type represents a DNA sequence as a vector of nucleotides
+/// Represents a DNA sequence as a vector of Nucleotide instances.
 #[allow(non_camel_case_types)]
 #[derive(Clone, Debug, Eq, PartialEq, Hash)]
 pub struct DNA_Sequence(pub Vec<Nucleotide>);
 
 impl DNA_Sequence {
-
     /// Creates and returns a new DNA sequence representing the reverse
     /// complement of the current sequence.
     #[allow(dead_code)]
@@ -76,7 +78,8 @@ impl DNA_Sequence {
     /// returns a corresponding DNA_Sequence instance.
     #[allow(dead_code)]
     pub fn from_string(dna_string: &str) -> DNA_Sequence {
-        let pattern_vec = dna_string.chars()
+        let pattern_vec = dna_string
+            .chars()
             .map(|letter| Nucleotide::from_char(letter))
             .collect();
 
