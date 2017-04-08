@@ -3,7 +3,7 @@ use std::fmt;
 use std::ops::{Index, Range};
 
 /// Represents a single nucleotide and acts as a building block
-/// for the DNA_Sequence type.
+/// for the `DNA_Sequence` type.
 #[allow(non_camel_case_types)]
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
 pub enum Nucleotide {
@@ -75,25 +75,24 @@ impl DNA_Sequence {
     }
 
     /// Provided a string representation of a DNA sequence (such as "AACGTACA"),
-    /// returns a corresponding DNA_Sequence instance.
-    #[allow(dead_code)]
+    /// returns a corresponding `DNA_Sequence` instance.
     pub fn from_string(dna_string: &str) -> DNA_Sequence {
-        let pattern_vec = dna_string
-            .chars()
-            .map(|letter| Nucleotide::from_char(letter))
-            .collect();
+        let pattern_vec = dna_string.chars().map(Nucleotide::from_char).collect();
 
         DNA_Sequence(pattern_vec)
     }
 
     /// Returns the length of the sequence (the number of nucleotides it contains).
-    #[allow(dead_code)]
     pub fn len(&self) -> usize {
         self.0.len()
     }
 
+    /// Returns true if the sequence is empty (length of 0).
+    pub fn is_empty(&self) -> bool {
+        self.0.len() == 0
+    }
+
     /// Provided a DNA pattern, returns the number of matches found in this sequence.
-    #[allow(dead_code)]
     pub fn pattern_match_count(&self, pattern: DNA_Sequence) -> usize {
         let mut count = 0;
 
@@ -104,6 +103,29 @@ impl DNA_Sequence {
         }
 
         count
+    }
+
+    /// Returns an integer value corresponding to the current sequence for use with
+    /// frequency array algorithms. **Note:** sequences longer than 32 nucleotides might
+    /// result in an integer overflow.
+    pub fn pattern_to_number(&self) -> u64 {
+
+        let mut pattern_number = 0;
+
+        for (index, nucleotide) in self.0.iter().rev().enumerate() {
+            let multiplier = 4u64.pow(index as u32);
+
+            let nucleotide_number = match *nucleotide {
+                Nucleotide::A => 0,
+                Nucleotide::C => 1,
+                Nucleotide::G => 2,
+                Nucleotide::T => 3,
+            };
+
+            pattern_number += nucleotide_number * multiplier;
+        }
+
+        pattern_number
     }
 }
 

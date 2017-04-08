@@ -29,7 +29,7 @@ fn main() {
     let pattern = DNA_Sequence::from_string(lines[0]);
     let k = lines[1].parse::<usize>().unwrap();
 
-    let result = find_frequent_words(pattern, k);
+    let result = find_frequent_words(&pattern, k);
 
     for word in result {
         print!("{} ", word);
@@ -37,7 +37,7 @@ fn main() {
     println!("");
 }
 
-fn find_frequent_words(pattern: DNA_Sequence, k: usize) -> Vec<DNA_Sequence> {
+fn find_frequent_words(pattern: &DNA_Sequence, k: usize) -> Vec<DNA_Sequence> {
 
     let mut map = HashMap::new();
     let mut highest_count = 0;
@@ -51,11 +51,9 @@ fn find_frequent_words(pattern: DNA_Sequence, k: usize) -> Vec<DNA_Sequence> {
         }
     }
 
-    let frequent_words = (&map)
+    (&map)
         .iter()
         .filter(|&(_, value)| *value == highest_count)
         .map(|(key, _)| key.clone())
-        .collect();
-
-    frequent_words
+        .collect()
 }
