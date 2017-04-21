@@ -1,6 +1,6 @@
 use std::ascii::AsciiExt;
 use std::fmt;
-use std::ops::{Index, Range};
+use std::ops::{Add, Index, Range};
 
 /// Represents a single nucleotide and acts as a building block
 /// for the `DNA_Sequence` type.
@@ -62,7 +62,6 @@ pub struct DNA_Sequence(pub Vec<Nucleotide>);
 impl DNA_Sequence {
     /// Creates and returns a new DNA sequence representing the reverse
     /// complement of the current sequence.
-    #[allow(dead_code)]
     pub fn reverse_complement(&mut self) -> DNA_Sequence {
 
         let reverse_complement_vec = self.0
@@ -80,6 +79,10 @@ impl DNA_Sequence {
         let pattern_vec = dna_string.chars().map(Nucleotide::from_char).collect();
 
         DNA_Sequence(pattern_vec)
+    }
+
+    pub fn new() -> DNA_Sequence {
+        DNA_Sequence(vec![])
     }
 
     /// Returns the length of the sequence (the number of nucleotides it contains).
@@ -126,6 +129,41 @@ impl DNA_Sequence {
         }
 
         pattern_number
+    }
+
+    /// Returns a DNA sequence associated with an integer value and k-mer size
+    pub fn number_to_pattern(mut number: u64, kmer_size: u64) -> DNA_Sequence {
+
+        let mut dna_sequence = DNA_Sequence::new();
+
+        for i in 0..kmer_size {
+
+            let divisor = 4u64.pow((kmer_size - 1 - i) as u32);
+
+            let nucleotide_number: u64 = number / divisor;
+
+            dna_sequence = dna_sequence +
+                           match nucleotide_number {
+                               0 => Nucleotide::A,
+                               1 => Nucleotide::C,
+                               2 => Nucleotide::G,
+                               3 => Nucleotide::T,
+                               _ => panic!("Unexpected value in number_to_pattern()"),
+                           };
+
+            number -= divisor * nucleotide_number;
+        }
+
+        dna_sequence
+    }
+}
+
+impl Add<Nucleotide> for DNA_Sequence {
+    type Output = DNA_Sequence;
+
+    fn add(mut self, nucleotide: Nucleotide) -> DNA_Sequence {
+        self.0.push(nucleotide);
+        self
     }
 }
 
