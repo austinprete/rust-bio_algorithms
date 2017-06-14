@@ -156,6 +156,22 @@ impl DNA_Sequence {
 
         dna_sequence
     }
+
+    pub fn find_occurences_of_pattern(&self, pattern: DNA_Sequence) -> Vec<usize> {
+        let mut occurence_indices: Vec<usize> = Vec::new();
+
+        let pattern_length = pattern.len();
+
+        for i in 0..(self.len() - pattern_length + 1) {
+            let sub_pattern = DNA_Sequence(self[i..i+pattern_length].to_vec());
+
+            if sub_pattern == pattern {
+                occurence_indices.push(i);
+            }
+        }
+
+        occurence_indices
+    }
 }
 
 impl Add<Nucleotide> for DNA_Sequence {
@@ -191,5 +207,11 @@ impl fmt::Display for DNA_Sequence {
                   |acc, &dna_letter| format!("{}{}", acc, dna_letter));
 
         write!(f, "{}", pattern_string)
+    }
+}
+
+impl Default for DNA_Sequence {
+    fn default() -> DNA_Sequence {
+        DNA_Sequence::new()
     }
 }
