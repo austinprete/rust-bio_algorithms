@@ -108,6 +108,19 @@ impl DNA_Sequence {
         count
     }
 
+    pub fn find_pattern_matches(&self, pattern: DNA_Sequence) -> Vec<usize> {
+        let mut match_indices = Vec::new();
+
+        for index in 0..(self.len() - pattern.len() + 1) {
+            if pattern == DNA_Sequence(self[index..index + pattern.len()].to_vec()) {
+                // if pattern == self[index..index + pattern.len()] {
+                match_indices.push(index);
+            }
+        }
+
+        match_indices
+    }
+
     /// Returns an integer value corresponding to the current sequence for use with
     /// frequency array algorithms. **Note:** sequences longer than 32 nucleotides might
     /// result in an integer overflow.
