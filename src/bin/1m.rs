@@ -19,7 +19,7 @@ fn main() {
     f.read_to_string(&mut file_text)
         .expect("Couldn't read file");
 
-    let lines: Vec<&str> =  file_text.split('\n').collect();
+    let lines: Vec<&str> = file_text.split('\n').collect();
 
     let number = lines[0].parse::<u64>().unwrap();
     let kmer_size = lines[1].parse::<u64>().unwrap();
