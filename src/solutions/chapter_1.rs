@@ -112,6 +112,13 @@ pub fn problem_1c() {
     println!("{}", dna_pattern.reverse_complement())
 }
 
+/// ### Pattern Matching Problem
+///
+/// Find all occurences of a pattern in a string
+///
+/// **Given:** Strings Pattern and Genome.
+/// 
+/// **Return:** All starting positions in Genome where Pattern appears as a substring.
 pub fn problem_1d() {
     let mut f = File::open("test_files/1d.txt").expect("Coudln't open file");
     let mut file_text = String::new();
