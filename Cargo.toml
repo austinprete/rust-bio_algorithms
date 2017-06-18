@@ -4,3 +4,10 @@ version = "0.1.0"
 authors = ["austinprete <austinprete23@gmail.com>"]
 
 [dependencies]
+
+[lib]
+name = "bio_algorithms"
+
+[[bin]]
+name="executable"
+doc=false
