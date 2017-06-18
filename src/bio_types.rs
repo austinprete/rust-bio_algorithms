@@ -56,7 +56,7 @@ impl fmt::Display for Nucleotide {
 
 /// Represents a DNA sequence as a vector of Nucleotide instances.
 #[allow(non_camel_case_types)]
-#[derive(Clone, Debug, Eq, PartialEq, Hash)]
+#[derive(Clone, Debug, Eq, PartialEq, Hash, Default)]
 pub struct DNA_Sequence(pub Vec<Nucleotide>);
 
 impl DNA_Sequence {

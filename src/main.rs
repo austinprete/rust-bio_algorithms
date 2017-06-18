@@ -5,7 +5,7 @@ use std::env;
 use bio_algorithms::solutions::chapter_1::*;
 
 fn main() {
-    let problem_number = env::args().skip(1).next();
+    let problem_number = env::args().nth(1);
     match problem_number {
         Some(number) => {
             match number.trim().as_ref() {
